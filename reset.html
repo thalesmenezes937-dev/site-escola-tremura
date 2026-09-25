@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redefinir senha</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <main class="admin-page">
+        <div class="admin-card">
+
+            <span class="subtitulo">ÁREA RESTRITA</span>
+            <h1>Nova senha</h1>
+            <p>Digite uma nova senha para acessar a administração.</p>
+
+            <form id="resetForm">
+                <label for="newPassword">Nova senha</label>
+                <input type="password" id="newPassword" placeholder="Digite a nova senha" required minlength="6">
+
+                <label for="confirmPassword">Confirmar senha</label>
+                <input type="password" id="confirmPassword" placeholder="Digite novamente" required minlength="6">
+
+                <button type="submit">Salvar nova senha</button>
+
+                <p id="resetMessage"></p>
+            </form>
+
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase.js"></script>
+
+    <script>
+        const resetForm = document.getElementById("resetForm");
+        const resetMessage = document.getElementById("resetMessage");
+
+        resetForm.addEventListener("submit", async (event) => {
+            event.preventDefault();
+
+            const newPassword = document.getElementById("newPassword").value;
+            const confirmPassword = document.getElementById("confirmPassword").value;
+
+            if (newPassword !== confirmPassword) {
+                resetMessage.textContent = "As senhas não são iguais.";
+                return;
+            }
+
+            const { error } = await supabaseClient.auth.updateUser({
+                password: newPassword
+            });
+
+            if (error) {
+                resetMessage.textContent = "Erro: " + error.message;
+                return;
+            }
+
+            resetMessage.textContent = "Senha alterada com sucesso!";
+
+            setTimeout(() => {
+                window.location.href = "admin.html";
+            }, 1500);
+        });
+    </script>
+
+</body>
+
+</html>
