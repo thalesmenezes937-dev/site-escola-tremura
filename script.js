@@ -58,10 +58,10 @@ const projetos = {
                 poster: "assents/capa.v.jpeg",
                 video: "assents/visita.mp4",
                 images: [
-                    "assets/visitas-1.jpg",
-                    "assets/visitas-2.jpg",
-                    "assets/visitas-3.jpg",
-                    "assets/visitas-4.jpg"
+                    "assents/visitas-1.jpg",
+                    "assents/visitas-2.jpg",
+                    "assents/visitas-3.jpg",
+                    "assents/visitas-4.jpg"
                 ]
             }
         ]
